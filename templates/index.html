@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Livro dos Livros</title>
+</head>
+<body>
+
+<h1>📘 Livro dos Livros</h1>
+
+<form method="post" action="/ideias/form">
+    <input type="text" name="titulo" placeholder="Título (opcional)"><br><br>
+
+    <textarea name="conteudo" placeholder="Escreva sua ideia..." rows="5" cols="40"></textarea><br><br>
+
+    <input type="text" name="rotulos" placeholder="Rótulos (ex: vida, trabalho)"><br><br>
+
+    <button type="submit">Salvar ideia</button>
+</form>
+
+<hr>
+
+<h2>Ideias</h2>
+
+<ul>
+{% for ideia in ideias %}
+    <li>
+        <strong>{{ ideia.titulo }}</strong><br>
+        {{ ideia.conteudo }}<br>
+        <small>{{ ideia.rotulos }} | {{ ideia.criado_em }}</small>
+    </li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
