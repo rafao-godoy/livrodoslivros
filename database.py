@@ -16,16 +16,17 @@ def criar_tabela():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ideias (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             titulo TEXT,
             conteudo TEXT NOT NULL,
             rotulos TEXT,
-            criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+            criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
 
     conn.commit()
     conn.close()
+
 
 def salvar_ideia(titulo, conteudo, rotulos):
     conn = get_connection()
