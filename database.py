@@ -25,6 +25,7 @@ def criar_tabela():
     """)
 
     conn.commit()
+    cursor.close()
     conn.close()
 
 
@@ -34,10 +35,12 @@ def salvar_ideia(titulo, conteudo, rotulos):
 
     cursor.execute("""
         INSERT INTO ideias (titulo, conteudo, rotulos)
-        VALUES (?, ?, ?)
+        VALUES (%s, %s, %s)
     """, (titulo, conteudo, rotulos))
 
+
     conn.commit()
+    cursor.close()
     conn.close()
 
 def listar_ideias():
@@ -51,6 +54,7 @@ def listar_ideias():
     """)
 
     rows = cursor.fetchall()
+    cursor.close()
     conn.close()
 
     ideias = []
