@@ -1,14 +1,13 @@
-import sqlite3
 import os
 import psycopg2
 
-DATABASE_URL = os.getenv("postgresql://livro_dos_livros_db_user:AREnw9CuQ65Yy5LeK7M5PX7qvSPz538f@dpg-d5o118f5r7bs73ciqto0-a.oregon-postgres.render.com/livro_dos_livros_db")
-
-#DB_NAME = "livro.db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_connection():
-    #return sqlite3.connect(DATABASE_URL)
-    return psycopg2.connect(DATABASE_URL)
+    if not DATABASE_URL:
+        raise Exception("DATABASE_URL não encontrada")
+    return psycopg2.connect(DATABASE_URL, sslmode="require")
+
 
 
 def criar_tabela():
